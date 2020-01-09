@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<title>Perl - Stock Quote</title>
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+</head>
+<body>
+	<header>
+		<h1>Perl - Stock Quote</h1>
+	</header>
+	<section>
+		<form action="cgi-bin/stock_quote.cgi" method="GET">
+		  <div id="box">
+			<label for="stockExchange">Enter a stock exchange</label>
+			<input type="text" name="stockExchange" /><br />
+			<label for="stockSymbol">Enter a stock symbol</label>
+			<input type="text" name="stockSymbol" /><br />
+		  </div>
+			<input type="submit" value="Get Quote" />
+		</form>
+	</section>
+</body>
+</html>

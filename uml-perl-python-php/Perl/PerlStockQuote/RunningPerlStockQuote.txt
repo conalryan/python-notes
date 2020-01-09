@@ -1,0 +1,34 @@
+Running PerlStockQuote
+
+Using Mac
+————————-
+1. Install Xcode
+
+Install Perl Modules
+-------------------------
+1. You may need to install Finance::Quote module into your ~/perl5 library
+2. Open a command terminal
+3. type the line below into your command terminal
+cpan App::cpanminus
+4. type the line below into your command terminal
+cpanm local::lib
+5. type the line below into your command terminal
+cpanm Finance::Quote
+
+Using XAMPP as a local server
+------------------------------
+1. copy PerlStockQuote folder into the /XAMPP/htdocs folder
+2. Start your XAMPP server
+3. Open a browser navigate to 
+localhost/htdocs/PerlStockQuote/StockQuote.html
+4. Enter a stock exchange e.g. nyse or nasdaq
+5. Enter a stock symbol e.g. BAC or AAPL
+6. Click 'Get Quote' button.
+7. A new page will load showing the result.
+
+If you get a server error
+-------------------------
+1. Open a command terminal
+2. cd to XAMPP/htdocs/PerlStockQuote/cgi-bin/stock_quote.cgi
+3. type the line below into your command terminal
+chmod 755 stock_quote.cgi
