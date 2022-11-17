@@ -43,8 +43,8 @@ for fruit in FRUITS:
     if fruit.startswith('b'):
         print(fruit)
         break
-else:
-    print('Not found')
+    else:
+        print('Not found')
 
 # range()
 # converts arg into list

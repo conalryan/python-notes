@@ -56,7 +56,7 @@ Struct Format Codes
 
 Format      C Type              Python Type         Standard size   Notes
 ------------------------------------------------------------------------------
-x           pad byte            no value            n/a             
+x           pad byte            no value            n/a
 c           char                bytes of length 1   1
 b           signed char         integer             1               (1), (3)
 B           unsigned char       integer             1               (3)
@@ -124,7 +124,7 @@ Read binary
 """
 print('--> read binary')
 
-with open("data/parrot.txt", "rb") as parrot_in:
+with open("parrot.txt", "rb") as parrot_in:
     while True:
         # print out a file 10 bytes at a time
         chunk = parrot_in.read(10)

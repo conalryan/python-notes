@@ -26,6 +26,10 @@ Classes
     All methods are called via the instance or the class name
     Base classes
         List of base classes may be specified in parentheses after the class name
+    No access modifiers - everything in Python class is public although underscore indicates private like javascript
+    Special methods
+        __init__ constructor method - hidden by default but can be overridden
+        __str__ string method, similar to toString in Java
 """
 # Simplest form of a class definition
 class ClassName():
@@ -73,7 +77,7 @@ Instance Methods
     Object is implicit parameter
     An instance method is a function defined in a class. When a method is called from an object, the object is passed
     in as the implicit first parameter, named self by strong convention.
-    
+
 Constructors
     Optional
     Named __init__
@@ -211,14 +215,14 @@ Class Data
     Shared by all instances
     Accessed via the class name from inside or outside of the class
     Any class attribute not overwritten by an instance attribute is also available through the instance
-    
+
 Class Methods
     Called from class or instance
     Decorate method with @classmethod to define
     This alters the method so that it gets a copy of the class object rather than the instance object
     This is true whether the method is called rom the class or from an instance
     First (implicit) parameter named "cls" by convention
-    
+
 Static Methods
     Related to class, but doesn't need instance or class object
     Use @staticmethod decorator
@@ -429,3 +433,62 @@ if __name__ == '__main__':
     print("w + w", w + w)
     print("v * 10", v * 10)
     print("w * 3", w * 3)
+
+
+global_var = []
+
+class MyClass:
+    # pass # keyword in Python tells interpreter 'do nothing' good for temp placeholder
+
+    # Don't need an instance in order to call a static var (ex. MyClass.a_static_variable).
+    a_static_variable = "This value will be the same for every class"
+
+    # Constructor method
+    # Provided by default and hidden, but can be overridden
+    def __init__(self, instance_attribute, optional_arg=22):
+        self.instance_attribute = instance_attribute
+        self.optional_arg = optional_arg
+        global_var.append(self)
+        print("__init__ called", instance_attribute)
+
+    # Method must have first parameter, usually called self.
+    def class_method(self):
+        print("class_method called")
+
+    def common_method(self):
+        print("common_method in parent class")
+        return "Parent"
+
+    # Override string method
+    def __str__(self):
+        return "I've overridden __str__ " + self.instance_attribute
+
+
+# Inherit a class by passing BaseClass/ParentClass in parenthesis
+class ChildClass(MyClass):
+    a_static_variable = "Overwritten Parent value in ChildClass"
+
+    def common_method(self):
+        parent_value = super().common_method()
+        print("common_method in child class, but parent value is {0}".format(parent_value))
+
+
+if __name__ == '__main__':
+    # Instantiate a new class
+    my_class = MyClass("required_arg")
+    print("Instantiate a new class:{0}".format(my_class))
+
+    # Don't need an instance in order to call a static var (ex. MyClass.a_static_variable).
+    print("MyClass.a_static_variable:{0}".format(MyClass.a_static_variable))
+
+    # Instantiate a new child class
+    a_child = ChildClass("child class is using parent constructor")
+    print("Instantiate a new child class:{0}".format(a_child))
+
+    print("ChildClass.a_static_variable:{0}".format(ChildClass.a_static_variable))
+
+    print('# a_child.class_method()')
+    a_child.class_method()
+
+    print('# a_child.common_method()')
+    a_child.common_method()

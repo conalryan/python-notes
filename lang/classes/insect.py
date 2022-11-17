@@ -30,5 +30,5 @@ if __name__ == '__main__':
                 insect.name, insect.species, flying_status
             ),
         )
-        insect.make_sound() # <6>
+        insect.make_sound()
         print()

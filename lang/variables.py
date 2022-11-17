@@ -33,7 +33,7 @@ print(spam is ham)  # True
 print(id(spam) == id(ham))  # True
 
 # To make a copy use list() or slice.
-print('--> Copy')
+print('Copy')
 toast = list(spam)
 print(toast is spam)  # False
 
