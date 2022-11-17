@@ -49,7 +49,7 @@ order by flight_time
 """
 Built-in String functions
 """
-print('--> Built-in string functions')
+print('--- Built-in string functions ---')
 some_string = "hello"
 print(some_string.capitalize())  # Hello
 print(some_string.replace("e", "a"))  # Hallo
@@ -69,13 +69,13 @@ Format
   Add width, padding
   Access elements of sequences and dictionaries
   Access object attributes
-  
+
   {:d}      Format the argument as an integer +
   {:03d}    Format as an integer, 3 columns wide, zero padded +
   {:>25s}   Same but right-justified +
   {:.3f}    Format as a float, with 3 decimal places
 """
-print('--> Format')
+print('--- Format ---')
 name = "Bob"
 machine = "Bobot"
 print("Nice to meet you {0}. I am {1}.".format(name, machine))  # Nice to meet you Bob. I am Bobot.
@@ -126,14 +126,14 @@ Interpolation
     u
         unicode
 """
-print('--> Interpolation')
+print('--- Interpolation ---')
 # f
 print(f"{name} is from {city}")  # Bob is from Peabody
 print(f"Nice to meet you {name}. I am {machine}")  # Nice to meet you Bob. I am Bobot.
 
 x = 24
 y = 32.2345
-print(f"{x:10s}{y:.2f}")
+# print(f"{x:10s}{y:.2f}") # ValueError: Unknown format code 's' for object of type 'int'
 
 # f strings are only supported in Python 3.6+
 if sys.version_info.major == 3 and sys.version_info.minor >= 6:
@@ -176,7 +176,7 @@ bytes
     Convert bytes to string with decode()
     Convert string to bytes with encode()
 """
-print('--> bytes')
+print('--- bytes ---')
 bits = b'data'
 byts = b"data"
 string_from_bytes = bits.decode()
@@ -213,7 +213,7 @@ list
     [1:] Slice out first item
     [:-1] Slice out last item
 """
-print('--> list')
+print('--- list ---')
 a_list = []
 another_list = ["value1", "value2", "value3"]
 print(another_list[0] == "value1")  # True
@@ -246,7 +246,7 @@ Slice
     sequence[::] all elements
     sequence[::step] all elements counting by step
 """
-print('--> Slice')
+print('--- Slice ---')
 fruits = ["pomegranate", "cherry", "apricot", "date", "apple",
 "lemon", "kiwi", "orange", "lime", "watermelon", "guava",
 "papaya", "fig", "pear", "banana", "tamarind", "persimmon",
@@ -283,7 +283,7 @@ print(a_list[:2])  # ['1', '2']
 Append
     Always appends 1 element, regardless if element is a list.
 """
-print('--> Append')
+print('--- Append ---')
 x = ['a', 'b', 'c', 'd', 'e']
 x.append('f')
 
@@ -296,7 +296,7 @@ print(x)
 Extend
     Append multiple items.
 """
-print('--> Extend')
+print('--- Extend ---')
 x.extend(more_letters)
 print(x)
 
@@ -305,7 +305,7 @@ print(x)
 Insert
     Specify item and location.
 """
-print('--> Insert')
+print('--- Insert ---')
 x.insert(0, 'z')
 x.insert(5, 'm')
 print(x)
@@ -314,6 +314,7 @@ print(x)
 """
 Delete
 """
+print('--- Delete ---')
 del x[0]
 print(x)
 
@@ -322,6 +323,7 @@ print(x)
 Remove
     Removes first occurrence
 """
+print('--- Remove ---')
 x.remove('c')
 print(x)
 
@@ -334,12 +336,14 @@ except ValueError as err:
 """
 Pop
 """
+print('--- Pop ---')
 print(x.pop(4))
 
 
 """
 Loop
 """
+print('--- Loop ---')
 for value in x:
     print(value)
 
@@ -357,7 +361,7 @@ Tuple
         one_element_tuple = 'one',
     Create a tuple with a comma separated list. Parenthesis are only required when the tuple is nested in a larger data structure
 """
-print('--> tuple')
+print('--- tuple ---')
 
 hostinfo = ('gemini', 'linux', 'ubuntu', 'hardy', 'Bom Smith')
 print(hostinfo)
@@ -372,7 +376,7 @@ Iterable unpacking
     Frequently used with list of tuples
     Power of unpacking comes when looping over a sequence of tuples and passing tuples (or other iterables) into a function
 """
-print('--> unpacking')
+print('--- unpacking ---')
 
 month, day, year = birthday
 print(month, day, year)
@@ -406,7 +410,7 @@ Unpacking Function Arguments
     * used to unpack list or tuple (or similar iterable)
     ** used to unpack dictionary or similar
 """
-print('--> unpacking function arguments')
+print('--- unpacking function arguments ---')
 
 # List of 4-element tuple
 people = [

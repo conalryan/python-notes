@@ -2,29 +2,28 @@
 
 from struct import Struct
 
+import os
+
 """
 File
     Can be opened in binary mode.
     Allows "raw", or non-delimited reads, which does not treat newlines and carriage returns as special.
     read()
-        In binary mode, read() will return a bytes object (array of 8-bit integers), not a Python string (array of Unicode characters.
-
-decode()
-    Convert the bytes object to a string.
-encode()
-    Convert Python string to bytes object.
-write()
-    Write raw data to a file.
-seek()
-    Position the next read.
-tell()
-    Determine the current location within the file.
-
+        In binary mode, read() will return a bytes object (array of 8-bit integers), not a Python string (array of Unicode characters).
+    decode()
+        Convert the bytes object to a string.
+    encode()
+        Convert Python string to bytes object.
+    write()
+        Write raw data to a file.
+    seek()
+        Position the next read.
+    tell()
+        Determine the current location within the file.
 Networks
     Use binary data.
     Convert to a standard if mixing platforms.
     Need to know layout of data.
-
 Webpages
     Typically encoded as ASCII or UTF-8 (represented by bytes object, which is an arrya of bytes).
 """
@@ -47,7 +46,7 @@ Struct
         Byte order or alignment refers to the same byte order or alignment used by the C compoiler on the current platform.
         Default
     Standard
-        Refers to a standar set of sizes for typical numerical objects, such as shorts, ints, longs, floats and doubles.
+        Refers to a standard set of sizes for typical numerical objects, such as shorts, ints, longs, floats and doubles.
 """
 
 
@@ -124,7 +123,13 @@ Read binary
 """
 print('--> read binary')
 
-with open("parrot.txt", "rb") as parrot_in:
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+DIRNAME = os.path.abspath(os.path.dirname(__file__))
+
+print("BASE_DIR: {0}".format(BASE_DIR))
+print("DIRNAME: {0}".format(DIRNAME))
+
+with open("{0}/parrot.txt".format(DIRNAME), "rb") as parrot_in:
     while True:
         # print out a file 10 bytes at a time
         chunk = parrot_in.read(10)

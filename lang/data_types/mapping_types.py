@@ -16,7 +16,7 @@ Dictionaries
     Can have nested dictionaries.
     As of 3.6 dictionaries are ordered.
     Keys must be hashable, i.e. immutable. Use strings, numbers, tuples of immutable type.
-    
+
     d = dict()
     d = {}
 """
@@ -58,11 +58,11 @@ print("---------- add, append, dict ----------")
 my_month_dict = {
     "1": {"11": [111]}
 }
-print(my_month_dict)
+print("my_month_dict: {0}".format(my_month_dict))
 
 # add new key
 my_month_dict["2"] = {str(22): [222, 222]}
-print(my_month_dict)
+print("my_month_dict: {0}".format(my_month_dict))
 
 # add new month
 month = 3
@@ -79,7 +79,7 @@ month_in_dict[str(day)] = day_in_dict
 # set dict
 my_month_dict[str(month)] = month_in_dict
 
-print(my_month_dict)
+print("my_month_dict: {0}".format(my_month_dict))
 
 # add new day
 month = 3
@@ -94,7 +94,7 @@ month_in_dict[str(day)] = day_in_dict
 # set dict
 my_month_dict[str(month)] = month_in_dict
 
-print(my_month_dict)
+print("my_month_dict: {0}".format(my_month_dict))
 
 # append value to day
 month = 3
@@ -109,7 +109,7 @@ month_in_dict[str(day)] = day_in_dict
 # set dict
 my_month_dict[str(month)] = month_in_dict
 
-print(my_month_dict)
+print("my_month_dict: {0}".format(my_month_dict))
 
 
 airports = {
@@ -134,7 +134,7 @@ d2 = {}
 d3 = dict(EWR='Newark', BOS='Boston')
 stuff = [('a', 5), ('m', 9)]
 d4 = dict(stuff)
-print(d4)
+print("dict d4: {0}".format(d4))
 
 
 """
@@ -152,7 +152,8 @@ Pretty print
 """
 from pprint import pprint
 
-pprint(airports)
+print("pretty print")
+pprint(d4)
 
 
 """
@@ -160,7 +161,7 @@ Loop
     Key value pair
 """
 for k, v in d4.items():
-    print(k, v)
+    print("loop d4.item key {0}, value {1}.".format(k, str(v)))
 
 
 """
@@ -212,7 +213,7 @@ set
         1. Dynamic is mutable.
         2. frozenset is fixed (immutable), like a tuple.
     Removes duplicates
-    
+
     s = set()
     f = frozenset()
 """

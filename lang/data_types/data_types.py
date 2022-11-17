@@ -65,7 +65,7 @@ a_negative_integer = -22
 Floats
     float
     IEE-754 double precision floating-point numbers with 53 bits of binary precision.
-    This is equivalent to between 15 and 16 significant digits in decimal. 
+    This is equivalent to between 15 and 16 significant digits in decimal.
 """
 a_positive_float = 3.14159
 a_negative_float = -23.56
@@ -76,7 +76,7 @@ print(float(a_negative_integer))  # -22.0
 
 
 """"
-Boolean 
+Boolean
     Starts with capital letter True or False
 """
 a_positive_boolean = True
@@ -112,8 +112,7 @@ except KeyError:
     print("error getting the key")
 # chain exceptions, can also pass error object
 except TypeError as error:
-    print("chaining errors")
-    print(error)
+    print("chaining errors {0}".format(error))
 # generic catch all
 except Exception:
     print("catch anything and everything")
