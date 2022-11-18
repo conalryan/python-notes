@@ -1,0 +1,3 @@
+This is the first line of some text
+and now we are on the second line
+lastly is this line

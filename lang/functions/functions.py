@@ -40,7 +40,7 @@ Functions
             def func(p1, p2, *p3, p4, p5, **p6)
                 # p1 and p2 are positional required
                 # *p3 is positional optional
-                # p4, p5 are named required (aka Keyword-only
+                # p4, p5 are named required (aka Keyword-only)
                 # **p6 are named optional
                 pass
     Return

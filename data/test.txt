@@ -1,0 +1,3 @@
+I am a test file.
+Maybe someday, he will promote me to a real file.Man, I long to be a real fileand hang out with all my new real file friends.appending this string but it will be on the same line, unless the previous line had '\n'
+appended this line

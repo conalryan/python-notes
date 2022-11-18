@@ -123,13 +123,17 @@ Read binary
 """
 print('--> read binary')
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-DIRNAME = os.path.abspath(os.path.dirname(__file__))
+DIRNAME = os.path.dirname(__file__)
+ABSPATH = os.path.abspath(__file__)
+REALPATH = os.path.realpath("")
+JOIN = os.path.join(REALPATH, "data", "parrot.txt")
 
-print("BASE_DIR: {0}".format(BASE_DIR))
 print("DIRNAME: {0}".format(DIRNAME))
+print("ABSPATH: {0}".format(ABSPATH))
+print("REALPATH: {0}".format(REALPATH))
+print("JOIN: {0}".format(JOIN))
 
-with open("{0}/parrot.txt".format(DIRNAME), "rb") as parrot_in:
+with open(JOIN, "rb") as parrot_in:
     while True:
         # print out a file 10 bytes at a time
         chunk = parrot_in.read(10)
