@@ -3,12 +3,12 @@
 """
 Modules
     Files containing Python code
-    File name is the module name with the suffix .py appending
+    File name is the module name with the file extension of .py
     Within a module the module's name (as a string) is available as the value of the global variable name
     No real difference from scripts
     Used to contain functions that can be loaded as needed by scripts.
     Simple module can contain one or more functions
-    Complex modules can contain initialization coe as well
+    Complex modules can contain initialization code as well
     Python classes are also implemented as modules
     Module is only loaded once, even if there are multiple places in an application that import it.
     Modules and packages should be documented with docstrings
@@ -32,7 +32,8 @@ Import
     Imported names may overwrite existing names
     Be careful to read the documentation
     Always import the entire module or import names explicitly, never use *
-    Any code in a module that is not contained in function or method is executed when the module is imported. Can include data assingments, startup task, connecting to a db, opening a file etc.
+    Any code in a module that is not contained in function or method is executed when the module is imported.
+    Can include data assingments, startup task, connecting to a db, opening a file etc.
     Note
         The first time a module is loaded, the interpreter creates a version compiled for faster loading
         This version has platform information embedded in the name, and has the extension .pyc.
@@ -52,8 +53,22 @@ Search Path
         Windows
             set PYTHONPATH=C:"\Documents and settings\Bob\Python"
         Linux/OS X
-            export PYTHONPATCH="/home/bob/python"
+            export PYTHONPATH="/home/bob/python"
         You can also append to sys.path in your scripts, but this can result in non-portable scripts because they will fail if the location of the imported module changes
             import sys
             sys.path.extend("/usr/dev/python/libs", "/home/bob/pylib")
 """
+
+"""
+Modules
+    import keyword
+    Can import classes, method, attributes
+"""
+# import means you'll need to prefix every reference classes.<the class i want>
+import classes
+
+# alternate syntax so you don't need to prefix classes
+from classes import ChildClass  # can also use * to import everything
+
+a_class = classes.MyClass("imported module")
+a_child = ChildClass("imported module")

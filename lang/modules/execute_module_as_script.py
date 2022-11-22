@@ -5,7 +5,7 @@ import sys
 """
 Executing Modules as Scripts
     __name__ is current module
-        set to __main-_ if run as script
+        set to __main__ if run as script
             __main__ means you are at the top level of the interpreter and your file is run as a script; it was not loaded as module
         set to module_name if imported
     test with if name == "__main__"

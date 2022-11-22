@@ -1,6 +1,6 @@
 """
 Functions
-    Block of organized and reusable code that is used to perform a certain actions
+    Block of organized and reusable code that is used to perform certain actions
     Generally function should do only 1 thing
     Built-in
         print()

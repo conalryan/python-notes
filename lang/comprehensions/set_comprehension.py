@@ -7,7 +7,7 @@ Set Comprehension
     Expression is added to set
     Transform iterable to set - with modifications
     Useful for turning any sequence into a set
-    Items can be modified of skipped as the set is built
+    Items can be modified or skipped as the set is built
     If don't need to modify the items, it's probably easier to just pass the sequence to the set() constructor
 """
 print('--> set comprehenesion')
