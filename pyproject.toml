@@ -16,7 +16,7 @@ audio = ["numpy>=2.2,<3", "scipy>=1.15,<2", "soundfile>=0.13,<1", "sounddevice>=
 ai = ["httpx>=0.28,<1", "pydantic>=2.10,<3", "fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
 transcribe = ["faster-whisper>=1.1,<2"]
 database = ["sqlalchemy>=2.0,<3", "psycopg[binary]>=3.2,<4"]
-ssh = ["paramiko>=4,<5"]
+ssh = ["paramiko>=4,<6"]
 legacy = ["requests>=2.32,<3", "flask>=3.1,<4", "lxml>=6,<8", "python-dateutil>=2.9,<3"]
 
 [dependency-groups]
