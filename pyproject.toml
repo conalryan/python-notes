@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python-audio-notes"
+version = "0.1.0"
+description = "Modern Python notes with AI, audio, and Rust integration examples"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "ruff>=0.11,<1"]
+audio = ["numpy>=2.2,<3", "scipy>=1.15,<2", "soundfile>=0.13,<1", "sounddevice>=0.5,<1"]
+ai = ["httpx>=0.28,<1", "pydantic>=2.10,<3", "fastapi>=0.115,<1", "uvicorn>=0.34,<1"]
+transcribe = ["faster-whisper>=1.1,<2"]
+database = ["sqlalchemy>=2.0,<3", "psycopg[binary]>=3.2,<4"]
+ssh = ["paramiko>=4,<5"]
+legacy = ["requests>=2.32,<3", "flask>=3.1,<4", "lxml>=6,<8", "python-dateutil>=2.9,<3"]
+
+[dependency-groups]
+dev = ["pytest>=8.3,<10", "ruff>=0.11,<1"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["modern_python", "audio_lab", "ai_examples", "database_access", "network_programming"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+include = ["modern_python/**/*.py", "audio_lab/**/*.py", "ai_examples/**/*.py", "tests/**/*.py", "database_access/*_catalog.py", "network_programming/download.py", "network_programming/paramiko_commands.py", "network_programming/requests_read_html.py", "os_operations/subprocess_ex.py", "developer_tools/benchmark.py", "numpy/basics.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/test_audio.py" = ["E402"]
+"tests/test_ai.py" = ["E402"]
+"tests/test_network.py" = ["E402"]

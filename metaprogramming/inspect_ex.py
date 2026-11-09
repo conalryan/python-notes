@@ -33,10 +33,10 @@ getcomments()
 getmodule()                         determine the module that an object came from
 getclasstree()                      arrange classes so as to represent their hierarchy
 ------------------------------------------------
-getargspec(),                       get info about function arguments
+signature(),                       inspect parameters and return annotations
 getargvalues()
 ------------------------------------------------
-formatargspec(),                    format an argument spec
+str(inspect.signature(func)),      format a function signature
 formatargvalues()
 ------------------------------------------------
 getouterframes(),                   get info about frames
@@ -71,7 +71,7 @@ for thing in (inspect, Spam, Ham):
 print()
 
 # Get argument specifications for a function
-print("Function spec for Ham:",inspect.getfullargspec(Ham))
+print("Function spec for Ham:", inspect.signature(Ham))
 print()
 
 # Get frame (function call stack) info

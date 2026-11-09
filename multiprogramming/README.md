@@ -20,12 +20,16 @@ With a single-core computer, this doesn't really happen; with a multicore comput
 application really can be executing different instructions at the same time.
 
 ## 1. Threading
-  Subdivides a single process into multiple subprocesses, or thresds, each of which
+  Creates threads within a single process, not subprocesses, each of which
   can be performing a different task. Threading in Python is good for IO-bound applications,
-  but does not increase the efficiency of compute-bound applications.
+  but ordinarily does not parallelize Python CPU loops under the GIL. Native
+  numerical libraries can release the GIL; optional free-threaded CPython can
+  run Python threads in parallel when its extensions are compatible.
 
 ## 2. Multiprocessing
-  Forks (spawns) new processes to do multiple tasks. Multiprocessing is good
+  Starts isolated processes to do multiple tasks. Fork and spawn are different
+  mechanisms. macOS/Windows use spawn; Python 3.14 generally uses forkserver on
+  other Unix platforms. Multiprocessing is good
   for both CPU-bound and IO-bound applications.
 
 ## 3. Asynchronous
@@ -62,9 +66,8 @@ application really can be executing different instructions at the same time.
 
 # Threads
   Like processes (but lighter weight; occupy much less memory, and take less tiem to create, than do processes)
-  Process itself is one thread
-  Process can create one more additional thread
-  Similar to creating new processes with fork()
+  A process starts with a main thread and can create additional threads.
+  Threads share the process address space; they are not created by fork().
 
 ## Time sharing
     Modern operating systems (OSs) use time-sharing to manage multiple programs which
@@ -76,7 +79,7 @@ application really can be executing different instructions at the same time.
     Each program that is running counts as a process.
     Can create any number of threads
     Similar to a process calling fork() function.
-    Process itself is a thread, and could be considered the "main" thread.
+    A process contains threads, including a main thread; it is not itself a thread.
     Just as processes can be interrupted at any time, so can threads.
 
 ## Processing table
@@ -84,12 +87,13 @@ application really can be executing different instructions at the same time.
     Each process will be shown as currently being in either Run state of Sleep state.
 
 ## Variable Sharing
-    Variables declared before thread starts are shared
-    Variables declared after thread starts are local
-    Threads communicate via shared variables
+    Sharing depends on references and scope, not when a variable was declared.
+    Threads can access shared objects; a local reference can point to shared data.
+    Threads communicate via queues or explicitly synchronized shared state.
     Major difference between ordinary processes and threads is how variables are shared
     Each thread has its own local variables, just as is the case for a process.
-    Access to global variables is controlled by locks.
+    Access to shared mutable state requires application-chosen synchronization.
+    The GIL does not make compound operations or data pipelines race-free.
 
 ## Debugging Thread Programs
   Harder than non-threaded programs
@@ -100,13 +104,25 @@ application really can be executing different instructions at the same time.
   Tracking down the cause of deadlocks can be very hard
   Child threads will not inherit the PDB process from the main thread. Invoke PDB from within the function
   which is run by the thread, by calling pdb.set_trace() at one or more points within the code
-  ```pyrhton
+  ```python
     import pdb
     while True:
         pdb.set_trace() # app will stop here and enter debugger
         k = c.recv(1)
-        if k == ’’:
+        if k == b'':
             break
   ```
   Then run program as usual, not through PDB. The program suddenly moves into debugging mode on its own.
   Then setp through using the n or s commands, query the vlaues of variables, etc.
+
+## Current Starting Point
+
+Use `modern_python/concurrency.py` for `asyncio.run`, `TaskGroup`, cancellation,
+timeouts, and bounded worker counts. Use `concurrent.futures.ThreadPoolExecutor`
+or `ProcessPoolExecutor` for explicit pool lifetimes. Process-pool functions
+must be importable/pickleable; guard process startup with `__main__`. Python 3.14
+also has `InterpreterPoolExecutor`, with isolated state and extension constraints.
+
+For audio, never place model inference, blocking locks, file writes, or encoding
+inside a native device callback. Use bounded buffers and workers, and define a
+drop/backpressure policy. `asyncio` improves orchestration, not DSP throughput.

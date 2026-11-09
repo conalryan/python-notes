@@ -1,40 +1,29 @@
-#!/usr/bin/env python
+# Python Style and Tooling
 
-# Python style
-• Code is read more often than it is written!
-• Style guides enforce consistency and readability
-• Indent 4 spaces (do not use tabs)
-• Keep lines ⇐ 79 characters
-• Imports at top of script, and on separate lines
-• Surround operators with space
-• Comment thoroughly to explain why and how code works when not obvious
-• Use docstrings to explain how to use modules, classes, methods, and functions
-• Use lower_case_with_underscores for functions, methods, and attributes
-• Use UPPER_CASE_WITH_UNDERSCORES for globals
-• Use StudlyCaps (mixed-case) for class names
-• Use _leading_underscore for internal (non-API) attributes
+Use four spaces, `snake_case` for functions/variables, `PascalCase` for classes,
+`UPPER_CASE` for constants, and a leading underscore for internal APIs. A global
+variable is not automatically a constant. Prefer readable, explicit code over
+clever one-liners. PEP 8 and PEP 257 remain useful references.
 
-Guido van Rossum, Python’s BDFL (Benevolent Dictator For Life), once said that code is read much more often than it is written.
-This means that once code is written, it may be read by the original developer, users, subsequent developers who inherit your code.
-Do them a favor and make your code readable. This in turn makes your code more maintainable.
-To make your code readable, it is import to write your code in a consistent manner.
-There are several Python style guides available, including PEP (Python Enhancement Proposal) 8, Style Guide for Python Code, and PEP 257, Docstring Conventions.
-If you are part of a development team, it is a good practice to put together a style guide for the team.
-The team will save time not having to figure out each other’s style.
+The modern learning track uses Ruff for linting/formatting, pytest for tests,
+and a project-selected 100-character line length. That is a local convention,
+not a claim that PEP 8's default changed. Comments explain intent, ownership,
+and tradeoffs; docstrings explain public contracts. Add types at boundaries,
+but use runtime validation for untrusted data.
 
-# Program Structure
-- All imports at top.
-- Modules must be imported before their contents may be accessed.
-- Variables, functions, and classes must be declared before use.
-- Main function goes at top.
-- Main function called at bottom.
+```sh
+uv run ruff check
+uv run ruff format --check
+uv run pytest
+```
 
-Order:
-1. import statements
-2. global variables
-3. main function
-4. functions
-5. call to main function
+Prefer module docstrings, grouped imports, constants, helper definitions, then
+`main()` and an `if __name__ == "__main__":` guard. Function bodies resolve names
+when called, so `main()` does not have to be defined before its helpers. Optional
+native imports can live inside explicit entry points so imports do not initialize
+hardware or load models. Avoid `import *` outside the retained cautionary exercises.
 
-Reference:
-    script_template
+Ruff and the default pytest discovery intentionally target the modern learning
+track. Old standalone scripts remain supplementary examples, not import-safe
+application modules. Run only the exercise you have read; some demonstrate
+filesystem writes, network access, or intentionally bad patterns.

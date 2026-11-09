@@ -62,5 +62,6 @@ False           false
 None            null
 
 NOTE
-    see the file json_custom_singledispatch.py for how to use the singledispatch module (which is not in the standard library) to handle multiple data types.
+    See json_custom_singledispatch.py for functools.singledispatch, which is
+    part of the standard library. No backport package is needed on modern Python.
 """

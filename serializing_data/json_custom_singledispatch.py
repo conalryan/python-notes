@@ -3,7 +3,7 @@
 #
 import json
 from datetime import date
-from singledispatch import singledispatch
+from functools import singledispatch
 
 
 class Parrot():
@@ -35,12 +35,14 @@ data = {
 
 @singledispatch
 def encode(obj):
-    return obj
+    # Returning the same unsupported object would recurse instead of reporting the error.
+    raise TypeError(f"Cannot encode {type(obj).__name__} as JSON")
 
 
 @encode.register(date)
 def encode_date(date_obj):
-    return date_obj.timetuple()
+    # ISO dates are interoperable with frontend clients, unlike struct_time tuples.
+    return date_obj.isoformat()
 
 @encode.register(Parrot)
 def encode_parrot(parrot_obj):

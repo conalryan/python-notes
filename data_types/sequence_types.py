@@ -181,11 +181,9 @@ bits = b'data'
 byts = b"data"
 string_from_bytes = bits.decode()
 
-# Stream of bytes (web page)
-import requests
-
-web_page = requests.get('http://www.amadeus.com')
-print(web_page.content)  # will print a stream of bytes
+# Bytes do not require a network request; keep this language exercise offline.
+web_page = "An audio session".encode("utf-8")
+print(web_page)
 
 print('abc')  # abc  # array of characters
 print(b'abc')  # b'abc'  # array of bytes

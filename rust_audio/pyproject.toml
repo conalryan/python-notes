@@ -1,0 +1,13 @@
+[build-system]
+requires = ["maturin>=1.9,<2"]
+build-backend = "maturin"
+
+[project]
+name = "rusty-audio-notes"
+version = "0.1.0"
+description = "A small Rust DSP extension for the Python audio notes"
+requires-python = ">=3.12"
+
+[tool.maturin]
+features = ["python"]
+module-name = "rusty_audio"

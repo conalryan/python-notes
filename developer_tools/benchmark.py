@@ -1,37 +1,29 @@
-#!/usr/bin/env python
+"""Benchmark comparable operations with fresh state rather than a growing list."""
 
-import timeit
+from timeit import repeat
 
-"""
-Benchmarking
-    Use the timeit module to benchmark two or more code snippets.
-    Create a timer object with specified # of repetitions
-"""
-# Setup coe is only executed once
-setup_code = 'values = []'
 
-test_code_one = '''
-for i in range(10000):
-    values.append(i)
-'''  # Code fragment executed many times
+def append_loop() -> list[int]:
+    values = []
+    for index in range(10_000):
+        values.append(index)
+    return values
 
-test_code_two = ''' 
-i = 0
-while i < 10000:
-    values.append(i)
-    i += 1
-'''  # Code fragment executed many times
 
-# Timer object creates time-able-code
-t1 = timeit.Timer(test_code_one, setup_code)
-t2 = timeit.Timer(test_code_two, setup_code)
+def comprehension() -> list[int]:
+    return [index for index in range(10_000)]
 
-print("test one:")
-# timeit() runs code fragment N times
-print(t1.timeit(1000))
-print()
 
-print("test two:")
-# timeit() runs code fragment N times
-print(t2.timeit(1000))
-print()
+def main() -> None:
+    assert append_loop() == comprehension()
+    for operation in (append_loop, comprehension):
+        # Each call builds its own list. Timeit setup runs once per timing trial,
+        # so putting a mutable list there would keep growing it across iterations.
+        timings = repeat(operation, number=100, repeat=5)
+        print(f"{operation.__name__}: {min(timings) / 100:.6f}s per call")
+    # For DSP, include Python/Rust conversions, allocations, and device copies in
+    # benchmarks. A tight loop benchmark alone does not prove a real-time speedup.
+
+
+if __name__ == "__main__":
+    main()

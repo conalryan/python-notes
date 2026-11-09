@@ -24,11 +24,11 @@ exec(program)
 
 
 """
-system()
-    Execute the command (a string) in a subshell.
+Directory listing
+    Use the filesystem API instead of invoking a shell for a basic listing.
 """
-print('--> system()')
-os.system('ls')
+print('--> directory listing')
+print(sorted(os.listdir('.')))
 
 
 """

@@ -6,13 +6,15 @@ Transactions
     commit() to save transactions
     rollback() to discard
     Default is autocommit off
-    autocommit\=True to turn on
+    autocommit=True to turn on (driver-specific; choose the policy explicitly)
 
     Sometimes a database task involves more than one change to your database (i.e. more than one SQL statement).
     You don't want the first SQL statement to succeed and the second to fail; this would leave your database in a corrupt state.
 
     Transactions allow you to make multiple changes to your database and only commit the changes if all the SQL statemenets were successful.
-    All Python DB API packages start a transaction when a connection is made. At this point you can call
+    Transaction start behavior differs by driver and autocommit mode. Use
+    sqlite3.connect(..., autocommit=False) for explicit PEP 249 transactions.
+    At this point you can call
     CONNECTION.commit() or CONNECTION.rollback(). For most packages if you don't call commit() after modify a table, the data will not be saved.
 
     Example

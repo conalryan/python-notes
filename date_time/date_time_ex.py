@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-from datetime import date, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 import time
-from dateutil import parser
 import os
+from zoneinfo import ZoneInfo
 
 
 """
@@ -13,7 +13,8 @@ Python modules for datetime
         time
         calendar
         All of above objects (except timedelta) implement strftime()
-        Timezone support is weak in standard library, use dateutil instead
+        zoneinfo provides IANA time zones in the standard library.
+        Use UTC instants for storage and named zones for local presentation.
     Non-standard Library:
         dateutil:
             Parse dates from text
@@ -50,7 +51,8 @@ print("date.year:", d.year)
 datetime
 """
 print('--> datetime()')
-now = datetime.now()  # Today's date and time
+now = datetime.now(UTC)  # An aware instant, not ambiguous local wall time.
+print("Local presentation:", now.astimezone(ZoneInfo("America/Los_Angeles")))
 print("now.day:", now.day)
 print("now.month:", now.month)
 print("now.year:", now.year)
@@ -158,7 +160,7 @@ print('--> fromtimestamp()')
 statinfo = os.stat('data/some_file.txt')
 ts = statinfo.st_atime  # Returns Unix timestamp
 print(ts)
-d = datetime.fromtimestamp(ts)
+d = datetime.fromtimestamp(ts, UTC)
 print(d)
 
 
@@ -205,35 +207,23 @@ for ts in 86400, timestamp, today:  # Loop through 3 epoch times (86400, timesta
     print(tm.tm_year, tm.tm_mon, tm.tm_mday)
 
     # Convert timestamp to Python datetime
-    dt = datetime.fromtimestamp(ts)
+    dt = datetime.fromtimestamp(ts, UTC)
     print(dt)
     print(dt.year, dt.month, dt.day)
 
 
-print('# ====================================== dateutil ================================================')
+print('# ====================================== explicit parsing ========================================')
 """
-dateutil
-    Will parse most date or date/time string without the need to put together directives as with strptime()
-    Returns Python datetime object
+Prefer an explicit format at application boundaries. Guessing whether 4/1 means
+April 1 or January 4 is not validation. python-dateutil remains useful when
+deliberately accepting free-form input, but is unnecessary for ISO timestamps.
 """
 
-date_strings = [
-    'April 1, 2015',
-    '4/1/2015',
-    'Apr 1, 2015',
-    'Apr 1 2015',
-    '04/01/2015',
-    '1 Apr 2015',
-    'April 1st, 2015',
-    'April 1, 2015 8:09',
-    '4/1/2015 8:09 PM',
-    'Apr 1, 2015 5 AM',
-    'Apricot 4, 341',
-]
+date_strings = ['2026-11-08T08:09:00+00:00', '2026-11-08T08:09:00Z', 'not-a-date']
 
 for date_string in date_strings:
     try:
-        dt = parser.parse(date_string)
+        dt = datetime.fromisoformat(date_string)
         print(dt)
     except ValueError as err:
         print("Can't parse", date_string)
